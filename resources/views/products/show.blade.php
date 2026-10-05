@@ -40,9 +40,14 @@
 
             @if ($product->stock > 0)
                 <p class="mb-4 text-sm text-emerald-700">متوفر ({{ $product->stock }} قطعة)</p>
-                <button disabled class="w-full rounded-lg bg-emerald-600 px-6 py-3 text-lg text-white opacity-60">
-                    أضف إلى السلة (قريبًا)
-                </button>
+               <form method="POST" action="{{ route('cart.add', $product) }}" class="flex gap-3">
+    @csrf
+    <input type="number" name="quantity" value="1" min="1" max="{{ min(20, $product->stock) }}"
+           class="w-20 rounded-lg border-gray-300 text-center">
+    <button class="flex-1 rounded-lg bg-emerald-600 px-6 py-3 text-lg text-white">
+        أضف إلى السلة
+    </button>
+</form>
             @else
                 <p class="text-red-600">نفدت الكمية</p>
             @endif

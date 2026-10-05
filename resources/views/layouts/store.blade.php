@@ -31,10 +31,26 @@
     @endauth
 </nav>
         </div>
+        <a href="{{ route('cart.index') }}" class="rounded-lg border px-3 py-2">
+    🛒 السلة ({{ collect(session('cart', []))->sum() }})
+</a>
     </header>
 
     <main class="mx-auto max-w-6xl p-4">
+
+
+
+        @if (session('success'))
+    <div class="mb-4 rounded-lg bg-emerald-100 p-3 text-emerald-800">{{ session('success') }}</div>
+@endif
+@if (session('error'))
+    <div class="mb-4 rounded-lg bg-red-100 p-3 text-red-800">{{ session('error') }}</div>
+@endif
+@if ($errors->any())
+    <div class="mb-4 rounded-lg bg-red-100 p-3 text-red-800">{{ $errors->first() }}</div>
+@endif
         @yield('content')
+
     </main>
 
     <footer class="mt-12 border-t bg-white p-6 text-center text-sm text-gray-500">
