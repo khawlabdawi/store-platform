@@ -18,6 +18,18 @@
                        class="w-full rounded-lg border border-gray-300 px-3 py-2 text-base">
                 <button class="rounded-lg bg-emerald-600 px-4 py-2 text-white">بحث</button>
             </form>
+            <nav class="flex items-center gap-3 text-sm">
+    @auth
+        <a href="{{ route('profile.edit') }}" class="text-gray-700">{{ auth()->user()->name }}</a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button class="rounded-lg border px-3 py-2">تسجيل الخروج</button>
+        </form>
+    @else
+        <a href="{{ route('login') }}" class="px-3 py-2">دخول</a>
+        <a href="{{ route('register') }}" class="rounded-lg bg-emerald-600 px-3 py-2 text-white">حساب جديد</a>
+    @endauth
+</nav>
         </div>
     </header>
 
