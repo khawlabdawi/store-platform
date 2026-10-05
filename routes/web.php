@@ -3,7 +3,17 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+
 use Illuminate\Support\Facades\Route;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'create'])->name('checkout.create');
+    Route::post('/checkout', [CheckoutController::class, 'store'])
+        ->middleware('throttle:10,1')
+        ->name('checkout.store');
+    Route::get('/checkout/success/{orderNumber}', [CheckoutController::class, 'success'])->name('checkout.success');
+});
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{product:slug}', [CartController::class, 'add'])->name('cart.add');

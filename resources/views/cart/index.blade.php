@@ -50,7 +50,10 @@
             <span class="text-2xl font-bold text-emerald-700">{{ number_format($total, 2) }}</span>
         </div>
 
-        <p class="mt-4 text-sm text-gray-500">خطوة إتمام الطلب (الشراء) هي المرحلة الجاية.</p>
+        <a href="{{ route('checkout.create') }}"
+   class="mt-4 block rounded-lg bg-emerald-600 px-6 py-4 text-center text-lg font-semibold text-white">
+    إتمام الطلب
+</a>
     @endif
 
 @endsection
