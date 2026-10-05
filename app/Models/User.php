@@ -45,6 +45,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 
@@ -59,4 +60,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wishlist::class);
     }
+    public function orders(): HasMany
+{
+    return $this->hasMany(Order::class);
+}
 }
